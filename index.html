@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,30 +9,30 @@
 	<link href="https://fonts.googleapis.com/css?family=Lato|Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="css/estilos.css">
 </head>
+
 <body>
 	<div class="contenedor">
 
 		<!-- Tarjeta -->
-		<section class="tarjeta active" id="tarjeta">
-			<div class="delantera ">
+		<section class="tarjeta" id="tarjeta">
+			<div class="delantera">
 				<div class="logo-marca" id="logo-marca">
-					<img src="img/logos/bancolombia-logo.png" alt=""> 
+					<img src="img/logos/bancolombia-logo.png" alt="">
 				</div>
 				<img src="img/chip-tarjeta.png" class="chip" alt="">
 				<div class="datos">
 					<div class="grupo" id="numero">
-						<p class="label">Número Tarjeta</p>
-						<p class="numero">#### #### #### ####</p>
+						<p class="label">Monto Solicitado</p>
+						<p class="numero">$####.###</p>
 					</div>
 					<div class="flexbox">
 						<div class="grupo" id="nombre">
-							<p class="label">Nombre Tarjeta</p>
-							<p class="nombre">Jhon Doe</p>
+							<p class="label">Nombre Solicitante</p>
+							<p class="nombre">................</p>
 						</div>
 
-						<div class="grupo" id="expiracion">
-							<p class="label">Expiracion</p>
-							<p class="expiracion"><span class="mes">MM</span> / <span class="year">AA</span></p>
+						<div class="logo-marca logo-marca-maestro" id="logo-marca">
+							<img src="img/logos/Maestro_logo.png" alt="maestro logo">
 						</div>
 					</div>
 				</div>
@@ -42,14 +43,17 @@
 				<div class="datos">
 					<div class="grupo" id="firma">
 						<p class="label">Firma</p>
-						<div class="firma"><p></p></div>
+						<div class="firma">
+							<p></p>
+						</div>
 					</div>
 					<div class="grupo" id="ccv">
 						<p class="label">CCV</p>
 						<p class="ccv"></p>
 					</div>
 				</div>
-				<p class="leyenda">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus exercitationem, voluptates illo.</p>
+				<p class="leyenda">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus exercitationem,
+					voluptates illo.</p>
 				<a href="#" class="link-banco">www.bancolombia.com</a>
 			</div>
 		</section>
@@ -64,17 +68,24 @@
 		<!-- Formulario -->
 		<form action="" id="formulario-tarjeta" class="formulario-tarjeta">
 			<div class="grupo">
-				<label for="inputNumero">Número Tarjeta</label>
-				<input type="text" id="inputNumero" maxlength="19" autocomplete="off">
-			</div>
-			<div class="grupo">
 				<label for="inputNombre">Nombre</label>
 				<input type="text" id="inputNombre" maxlength="19" autocomplete="off">
 			</div>
+			<div class="grupo">
+				<label for="inputNumero">Monto Prestamo</label>
+				<input type="text" id="inputNumero" maxlength="8" autocomplete="off">
+			</div>
+
 			<div class="flexbox">
 				<div class="grupo expira">
-					<label for="selectMes">Expiracion</label>
+					<label for="selectMes">Fecha</label>
 					<div class="flexbox">
+						<div class="grupo-select">
+							<select name="day" id="selectDay">
+								<option disabled selected >Dia</option>
+							</select>
+							<i class="fas fa-angle-down"></i>
+						</div>
 						<div class="grupo-select">
 							<select name="mes" id="selectMes">
 								<option disabled selected>Mes</option>
@@ -89,17 +100,58 @@
 						</div>
 					</div>
 				</div>
+			</div>
 
-				<div class="grupo ccv">
-					<label for="inputCCV">CCV</label>
-					<input type="text" id="inputCCV" maxlength="3">
+			<div class="flexbox-tipo">
+				<label for="selectMes">Tipo</label>
+				<div class="flexbox">
+					<div class="grupo-select">
+						<select name="tipo" id="selectTipo">
+							<option disabled selected>Tipo</option>
+							<option value="estudiantil">Estudiantil</option>
+							<option value="vivienda">Vivienda</option>
+						</select>
+						<i class="fas fa-angle-down"></i>
+					</div>
+				</div>
+				<label for="selectMes">Cuotas</label>
+				<div class="flexbox">
+					<div class="grupo-select">
+						<select name="cuotas" id="selectCuotas">
+							<option disabled selected>Cuotas</option>
+							<option value="doce">12</option>
+							<option value="doscuatro">24</option>
+							<option value="tresseis">36</option>
+						</select>
+						<i class="fas fa-angle-down"></i>
+					</div>
 				</div>
 			</div>
-			<button type="submit" class="btn-enviar">Enviar</button>
+			<button class="btn-enviar" id="btn-calculo">Calcular</button>
+			<button class="btn-enviar" id="btn-limpiar">Limpiar</button>
 		</form>
+		<div class="contenedor__mensaje" id="contenedor__mensaje">
+			<button class="btn-cerrar" id="btn-cerrar"><i class="fas fa-times-circle btn-cerrar-icon"></i></button>
+			<div class="contenedor__resultado">
+				<h5 class="valor__cuota valor">Señor@ <strong class="nombre__usuario" id="nombre__usuario"></strong> tener en cuenta que en todos nuestros prestamos incluimos la cuota de manejo 8.000 mensuales. </h5>
+				<h2 class="titulo__resultado">Valor Cuota:</h2>
+				<h5 class="valor__cuota valor" id="valor__cuota">#####</h5>
+				<h2 class="titulo__resultado">Total Deuda:</h2>
+				<h5 class="valor__total valor" id="valor__total">#####</h5>
+			</div>
+		</div>
+		<div class="contenedor__mensaje" id="contenedor__mensaje__error">
+			<button class="btn-cerrar" id="btn-cerrar__error"><i class="fas fa-times-circle btn-cerrar-icon"></i></button>
+			<div class="contenedor__resultado">
+				<h2 class="titulo__resultado">Debes completar todos los campos</h2>
+			</div>
+		</div>
 	</div>
+
+
 
 	<script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
 	<script src="js/main.js"></script>
 </body>
+
 </html>
